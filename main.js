@@ -53,12 +53,12 @@ signup_form.addEventListener("submit", (event) => {
     .then((userCredential) => {
         // Signed up 
         const user = userCredential.user;
+        window.location.href = "home.html";
         Swal.fire({
             title: "Succesful...",
             icon: "success",
             text: "Account Created Sucessfully...",
         });
-        window.location.href = "home.html";
     })
     .catch((error) => {
         const errorCode = error.code;
