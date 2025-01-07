@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, getRedirectResult,} 
+    from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 
 
 // Your web app's Firebase configuration
@@ -14,18 +15,23 @@ const firebaseConfig = {
   
   // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+const provider = new GoogleAuthProvider();
 
 let login_page_btn = document.getElementById("login-page-btn");
 let signup_page_btn = document.getElementById("signup-page-btn");
 let login_form = document.getElementById("login-form");
 let signup_form = document.getElementById("signup-form");
+let ico_google_signup = document.getElementById("ico-google-signup");
+let ico_facebook_signup = document.getElementById("ico-facebook-signup");
+let ico_github_signup = document.getElementById("ico-github-signup");
 
 login_form.addEventListener("submit", (event) => {
     event.preventDefault()
     let email = document.getElementById("login-user-id").value;
     let password = document.getElementById("login-user-pwd").value;
 
-    const auth = getAuth();
+    
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
         // Signed in 
@@ -48,7 +54,7 @@ signup_form.addEventListener("submit", (event) => {
     let email = document.getElementById("signup-user-id").value;
     let password = document.getElementById("signup-user-pwd").value;
 
-    const auth = getAuth();
+    
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
         // Signed up 
@@ -65,6 +71,31 @@ signup_form.addEventListener("submit", (event) => {
         const errorMessage = error.message;
     });
 })
+
+// social 
+ico_google_signup.addEventListener("click", () => {
+    signInWithPopup(auth, provider)
+    .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+        window.location.href = "home.html";
+    }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+    });
+});
+
 
 // Toggler Start
 signup_page_btn.addEventListener("click", () => {
