@@ -3,15 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Profile</title>
+    <link rel="stylesheet" href="home.css">
 </head>
 <body>
-    <div>
-        <h3 id="login_user">hi</h3>
+    <div class="container">
+        <div class="navbar-div">
+            <img src="images/Firebase_logo.png" alt="Firebase_logo" id="navbar-logo">
+            <div class="navbar-user">
+                <h3 id="login_user">hi</h3>
+                <button id="signout-btn">Sign Out</button>
+            </div>
+        </div>
+        
+        <div class="content-div">
+            <div class="form-container">
+                <h1>Welcome To Profile</h1>
+                <form action="#">
+                    <label class="form-label" for="">Full Name : <input class="form-inp" type="text" name="" id="full-name"></label>
+                    <label class="form-label" for="">Date of Birth : <input class="form-inp" type="text" name="" id="dob"></label>
+                    <label class="form-label" for="">Gender : 
+                        Male <input type="radio" name="gender" id="male" value="male">
+                        Female <input type="radio" name="gender" id="female" value="female">
+                    </label>
+                    <label class="form-label" for="">Country :
+                        <select class="form-inp" name="" id="country">
+                            <option value="">Select Country</option>
+                            <option value="pakistan">Pakistan</option>
+                            <option value="india">India</option>
+                            <option value="bangladesh">Bangladesh</option>
+                            <option value="china">China</option>
+                        </select>
+                    </label>
+                    <label class="form-label" for="">Contact No : <input class="form-inp" type="tel" name="" id="contact"></label>
+                    <button class="submit-btn" type="submit">Submit</button>
+                    <button class="submit-btn" type="reset">Reset</button>
+                </form>
+            </div>
+        </div>
     </div>
-    <h1>Welcome To Home Page</h1>
-    <img src="underconstruction.webp" alt="">
-    <button id="signout-btn">Sign Out</button>
 </body>
 <script type="module" src="home.js"></script>
 </html>
